@@ -33,9 +33,13 @@ my %opts = (
                                'scripts/testsystem_d'
                                ],
             'PREREQ_PM' => {
-                'Carp'          => 0,
-		'Pod::Usage'    => 0,
-                'Getopt::Long'  => 0,
+                'Carp'           => 0,
+		'Config::Simple' => 0,
+		'Pod::Usage'     => 0,
+                'Getopt::Long'   => 0,
+                'XML::Parser'    => 0,
+		'SOAP::Lite'	 => 0, # use 0.65 to get SSL functions working
+		'WebService::TicketAuth' => 1.04,
                 },
             'AUTHOR'       => 'Bryce Harrington <bryce@osdl.org>',
             'ABSTRACT_FROM'=> 'lib/WebService/TestSystem.pm',

@@ -12,7 +12,7 @@
 
 name:	  	  perl-%{pkgname}
 summary:	  %{pkgname} - SOAP Server for accessing test systems
-version:	  0.05
+version:	  0.06
 release: 	  1
 vendor:		  Open Source Development Labs
 packager:	  Bryce Harrington <bryce@osdl.org>
@@ -117,7 +117,7 @@ grep -v '.bak$' |xargs --no-run-if-empty \
 
 %pre
 # Add the user and group
-grep ^%{user}: /etc/passwd >/dev/null || \
+/usr/bin/id %{user} >/dev/null 2>&1 || \
 /usr/sbin/useradd -c 'WebService Test System' -d %{loc} -r -M %{user}
 
 %post

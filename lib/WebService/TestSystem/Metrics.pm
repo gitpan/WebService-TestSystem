@@ -27,7 +27,7 @@ use strict;
 use DBI;
 
 use vars qw($VERSION %FIELDS);
-our $VERSION = '0.05';
+our $VERSION = '0.06';
 
 use fields qw(
               _app
@@ -116,7 +116,7 @@ sub metrics_requests_per_month {
         $year = (localtime)[5] + 1900;
     }
     return undef unless ($year =~ /^\d\d\d\d$/);
-	
+
     my $addy = $self->{_site_domain};
 
     my $sql;
@@ -145,10 +145,17 @@ sub metrics_requests_per_month {
     }
 
     my $dbh = $self->{_app}->_get_dbh() or return undef;
+
     my $sth = $dbh->prepare($sql);
     $sth->execute;
 
-    return $sth->fetchall_hashref( {} );
+    my @usage = ();
+    while (my $row = $sth->fetchrow_hashref) {
+        push @usage, $row;
+    }
+    $sth->finish;
+
+    return \@usage;
 }
 
 =head2 metrics_test_run_time($year, $month)
@@ -305,7 +312,7 @@ sub metrics_queue_lengths {
     my $self = shift;
 
     my $sql = qq|
-	SELECT host_type.uid, host_type.descriptor, test_request.status, 
+	SELECT host_type.uid as id, host_type.descriptor, test_request.status, 
 	COUNT(test_request.status='Queued') AS queue_length 
 	FROM test_request 
 	LEFT JOIN host_type ON test_request.host_type_uid=host_type.uid 

@@ -47,65 +47,78 @@ Phase 3 - Reporting Tools
 * (DONE) Extract parts of stp_report.pl
 * (DONE) Figure out why the WebService::TicketAuth module doesn't install pms
 
-* In stp-metrics break out the different reports into subroutines
-* In stp-metrics provide a general purpose result error handler
-* Remove the stpdb_dbi params being passed into stp- scripts
-* Implement db handling in Metrics.pm for each routine
-
-* Extract parts of stp_daily.pl
-* Extract parts of stp_hosts.pl
-* Extract parts of stp_hourly.pl 
-* Fix WebService::TestSystem & trsearch to handle order_by correct
-* Monthly Totals tool
-* Extract parts of linstab internals into testsystem
-* Extract parts of plm_web_report.pl
-* Extract parts of analyze_queue.web.pl
-
-* Routines to report detailed info about a given host
-* Make testsys->get_host() return state and type names
-* Look at plmsend to include in stp_user_tools
-
-* Consider alternate approaches for doing database queries (STP::DB?)
-  - fetchall_hashref ?
-* Add more info to host incl. currently running test, etc.
-* Add sth->finish()
-* Finish rpm for WebService::TestSystem
-* Add synopsis section to WebService::TestSystem and ::Metrics
-* Figure out good way of incrementing the version numbers in each
-  TestSystem module
+* (DONE) In stp-metrics break out the different reports into subroutines
+* (DONE) In stp-metrics provide a general purpose result error handler
+* (DONE) Implement db handling in Metrics.pm for each routine
+* (DONE) Monthly Totals tool
+* (DONE) Consider alternate approaches for doing database queries (STP::DB?)
 
 Phase 4 - Authentication
 -------
 * (DONE) Learn about authentication & access control with SOAP
 * Implement authentication
    - (DONE) Implement ability to control email/username in stp-login
-   - Add opts and pod to stp-login
+   - (DONE) Add opts and pod to stp-login
    - (DONE) Determine how to best handle password transfer
-   - Break out module WebService::TicketAuth w/ overloadable is_valid()
+   - (DONE) Break out module WebService::TicketAuth w/ overloadable is_valid()
    - Check username/password on server side against a db
-   - Have Kees validate the login auth stuff
-* Implement access control
-* Implement support for use of ENV settings (if needed)
-* Create an stp_login script that prompts for password & creates authfile
-* Quickie tool to check out a machine to a given user
-* Remove/replace warn() calls
-* Investigate MIME-based file upload
+   - (DONE) Have Kees validate the login auth stuff
+* (DONE) Create an stp_login script that prompts for password & creates authfile
+* (DONE) Investigate MIME-based file upload
+* (DONE) Implement stp-logout tool
+* (DONE) Remove the stpdb_dbi params being passed into stp- scripts
+* (DONE) Remove/replace warn() calls
+* (DONE) Fix the new code in testsystem_d from Kees
+* (DONE) Add synopsis section to WebService::TestSystem
+* (DONE) Write prelim script to submit a test request, stp-tradd
+* (DONE) Hook up the validation code in Request.pm - fix the request object
+* (DONE) Make testsys->get_hosts() return state and type names
+
+* Test out the TestSystem login capabilities
+  - (DONE) Why is stp-login erroring when trying to use $self?
+  - (DONE) Remove the warns added to TicketAuth
+  - (DONE) Should I embed the Auth object into TestSystem instead of inheriting?
+  - Upgrade to SOAP::Lite 0.60 on mercury
+* Test stp-hostreq (is this the best name?)
+* Test stp-request
+* Test stp-testadd
+* Implement the plm soap calls in the validation code
+* In validation code, make it substitute id's for values in user_id, etc.
+* In validation code, implement all of the sql_* routines
 
 Phase 5 - More Packaging
 -------
-* Break out a config file
-* Set up logging from server
 * (DONE) Create separate package of client tools
+* (DONE) Break out a config file
+* (DONE) Change as many 'uid's to 'id's as possible without having to alter db
+* (DONE) Ensure the functions in all modules use head2 instead of head3
+* (DONE) Figure out errors being emitted from testsystem_d now
+* Finish rpm for WebService::TestSystem
+* Move get_request_queue() into WebService::TestSystem::Request
+* Set up logging from server
 * Make Makefile.PL able to substitute different etc file locations into pm
+* Make Makefile.PL able to substitute alternate default servernames
+* Convert from fetchrow_hashref to fetchall_arrayref & build struct
+* Move more code out of the main TestSystem module
+* Look at plmsend to include in stp_user_tools
+* Quickie tool stp-hostreq to check out a machine to a given user
 
 Phase 6 - Test Request Submission
 -------
-* Pull in logic from Zope for entering a test request
-* Implement the validation code from Zope in Perl
+* (DONE) Pull in logic from Zope for entering a test request
+* (DONE) Implement the validation code from Zope in Perl
+* Implement code to load a test request from a file
+* Finish and test stp-tradd
+* Write a single request submission tool & test out basic functionality
 * Test out bulk-submission of test requests
+* Figure out good way of incrementing the version numbers in each
+  TestSystem module
+* Investigate use of autoload for _metrics and _request
+* Fix WebService::TestSystem & trsearch to handle order_by correct
 
 Phase 7 - Test Editing
 -------
+* (DONE) File format for adding a new test
 * Implement add_test
 * Implement update_test
 * Set available host types for a test
@@ -115,6 +128,7 @@ Phase 7 - Test Editing
 
 Phase 8 - Host management
 -------
+* Routines to report detailed info about a given host
    + add_host
    + update_host
    + putting machines into/out of maintenance mode
@@ -124,6 +138,12 @@ Phase 9 - Client registration
 -------
 * Add functionality for registering new client machines
 * Add way to direct clients to download & execute given tests
+* Extract parts of linstab internals into testsystem
+* Extract parts of plm_web_report.pl
+* Extract parts of analyze_queue.web.pl
+* Extract parts of stp_daily.pl
+* Extract parts of stp_hosts.pl
+* Extract parts of stp_hourly.pl 
 
 Phase 10 - Test Client Machine Checkout
 --------
@@ -149,10 +169,8 @@ Phase 11 - Software management
 --------
 * add new software types
 * Update software types
+* Flesh out synopsis sections of modules more thoroughly
 
 Future
 ------
 * Query caching
-* Secure authentication - encrypt password during login
-  - http://www.sys-con.com/story/?storyid=40248&DE=1
-  - http://groups.yahoo.com/group/soaplite/message/729
