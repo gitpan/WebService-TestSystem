@@ -102,6 +102,18 @@ sub MY::postamble {
   
     $text .= install_clause($etcfiles, $etcdir, 0);
 
+    $text .= "install :: init.d/testsystem\n";
+    my $initdir  = catdir( $destdir,  'etc', 'init.d' );
+    my $initfiles;
+    if (-f '/etc/gentoo-release') {
+        # This is a gentoo system so use the gentoo init script instead
+        $text .= "\t\$(CP) init.d/testsystem.gentoo $initdir/testsystem\n";
+        $text .= "\t\$(CHMOD) -R a+rx $initdir/testsystem\n";
+    } else {
+        $text .= "\t\$(CP) init.d/testsystem $initdir/testsystem\n";
+        $text .= "\t\$(CHMOD) -R a+rx $initdir/testsystem\n";
+    }
+
     return $text;
 }
 # vi:set ai ts=4 sw=4 expandtab:
