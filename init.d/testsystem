@@ -18,11 +18,16 @@
 #
 . /etc/init.d/functions
 
+# start up testsystem
+#
+# chkconfig: 3 99 99
+# description: Just start up testsystem.
+
 RETVAL=0
 
 start() {
         echo -n "Starting testsystem: "
-        /usr/bin/testsystem_d >> /dev/null 2>> /dev/null &
+        /usr/bin/testsystem_d -u testsys >> /dev/null 2>> /dev/null &
         RETVAL=$?
         [ $RETVAL -eq 0 ] && touch /var/lock/subsys/testsystem
         [ $RETVAL -eq 0 ] && echo_success || echo_failure

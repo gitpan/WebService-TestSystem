@@ -116,6 +116,15 @@ sub MY::postamble {
         $text .= "\t\$(CP) init.d/testsystem $initdir/testsystem\n";
         $text .= "\t\$(CHMOD) -R a+rx $initdir/testsystem\n";
     }
+    $text .= "\n\n";
+
+    my $scripts_dist_dir = "stp_user_scripts-\$(VERSION)";
+    $text .= "scripts-dist: \n";
+    $text .= "\t\$(MKPATH) $scripts_dist_dir\n";
+    $text .= "\t\$(CP) scripts/stp-* $scripts_dist_dir\n";
+    $text .= "\t\$(CHMOD) a+rx $scripts_dist_dir/*\n";
+    $text .= "\t\$(CP) doc/SCRIPTS_README $scripts_dist_dir/README\n";
+    $text .= "\ttar czf $scripts_dist_dir.tgz $scripts_dist_dir\n\n";
 
     return $text;
 }

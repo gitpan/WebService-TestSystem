@@ -28,62 +28,105 @@ Phase 2 - Packaging
 * (DONE) Set up Makefile.PL / installation stuff
 * (DONE) Set up initscript for the daemon
 * (DONE) Test out init.d/testsystem
-* Get cpan2rpm to produce valid rpm
-  - Reports dependency error for WebService::TestSystem
-  - Doesn't reliably install /etc/init.d/testsystem
-  - Does not uninstall the WebService::TestSystem perl module
+* (DONE) Get cpan2rpm to produce valid rpm
   - Is installing into / instead of $distdir
+  - Doesn't reliably install /etc/init.d/testsystem
+  - Doesn't install etc files
+  - Reports dependency error for WebService::TestSystem
+  - Does not uninstall the WebService::TestSystem perl module
 
 Phase 3 - Reporting Tools
 -------
-* Monthly Totals tool
-* Extract parts of linstab internals into testsystem
-* Extract parts of stp_report.pl
-* Extract parts of plm_web_report.pl
-* Extract parts of analyze_queue.web.pl
+* lshost, lstest
+   + (DONE) Implement functionality + cmdline options
+   + (DONE) POD
+   + (DONE) Package
+   + (DONE) Distribute to users
+* (DONE) lsimages, patches, software
+* (DONE) Test the etc file and order_by fixes
+* (DONE) Extract parts of stp_report.pl
+* (DONE) Figure out why the WebService::TicketAuth module doesn't install pms
+
+* In stp-metrics break out the different reports into subroutines
+* In stp-metrics provide a general purpose result error handler
+* Remove the stpdb_dbi params being passed into stp- scripts
+* Implement db handling in Metrics.pm for each routine
+
 * Extract parts of stp_daily.pl
 * Extract parts of stp_hosts.pl
 * Extract parts of stp_hourly.pl 
+* Fix WebService::TestSystem & trsearch to handle order_by correct
+* Monthly Totals tool
+* Extract parts of linstab internals into testsystem
+* Extract parts of plm_web_report.pl
+* Extract parts of analyze_queue.web.pl
+
 * Routines to report detailed info about a given host
+* Make testsys->get_host() return state and type names
+* Look at plmsend to include in stp_user_tools
+
+* Consider alternate approaches for doing database queries (STP::DB?)
+  - fetchall_hashref ?
+* Add more info to host incl. currently running test, etc.
+* Add sth->finish()
+* Finish rpm for WebService::TestSystem
+* Add synopsis section to WebService::TestSystem and ::Metrics
+* Figure out good way of incrementing the version numbers in each
+  TestSystem module
 
 Phase 4 - Authentication
 -------
-* Learn about authentication & access control with SOAP
-* Implement authentication 
+* (DONE) Learn about authentication & access control with SOAP
+* Implement authentication
+   - (DONE) Implement ability to control email/username in stp-login
+   - Add opts and pod to stp-login
+   - (DONE) Determine how to best handle password transfer
+   - Break out module WebService::TicketAuth w/ overloadable is_valid()
+   - Check username/password on server side against a db
+   - Have Kees validate the login auth stuff
 * Implement access control
+* Implement support for use of ENV settings (if needed)
+* Create an stp_login script that prompts for password & creates authfile
+* Quickie tool to check out a machine to a given user
+* Remove/replace warn() calls
+* Investigate MIME-based file upload
 
 Phase 5 - More Packaging
 -------
 * Break out a config file
-* Do I need a website / web page for this?
 * Set up logging from server
-* Create separate package of client tools
+* (DONE) Create separate package of client tools
+* Make Makefile.PL able to substitute different etc file locations into pm
 
-Phase 6 - Design
+Phase 6 - Test Request Submission
 -------
-* Go through some existing scripts & decide what to include
+* Pull in logic from Zope for entering a test request
+* Implement the validation code from Zope in Perl
+* Test out bulk-submission of test requests
 
-Phase 7 - API Stubbing
+Phase 7 - Test Editing
 -------
-* Implement routines for all scripts identified as needed
-   + add_test
+* Implement add_test
+* Implement update_test
+* Set available host types for a test
+* Adding/editing wrap.sh parameters & descriptions
+* Editing description info for a test
+* Uploading new code for a test
+
+Phase 8 - Host management
+-------
    + add_host
-   + update_test
    + update_host
-   + list_*
    + putting machines into/out of maintenance mode
    + retrieve logs from a given machine
-   + add new software types
-   + Update software types
-   + set available host types for a test
 
-Phase 8 - Client registration
+Phase 9 - Client registration
 -------
 * Add functionality for registering new client machines
 * Add way to direct clients to download & execute given tests
 
-Phase 9 - Test Client Machine Checkout
--------
+Phase 10 - Test Client Machine Checkout
+--------
 * Invokes configuration of system as requested
 * SOAP call to check out stp machine for short period of time for login
    + check_out stp4-001 [--username=bob] [--period='5 hrs'] [--notify=me@domain.org]
@@ -102,6 +145,14 @@ Phase 9 - Test Client Machine Checkout
      client-side script on it that communicates with the server.
    + Once testing is complete, master dismisses client
 
+Phase 11 - Software management
+--------
+* add new software types
+* Update software types
+
 Future
 ------
 * Query caching
+* Secure authentication - encrypt password during login
+  - http://www.sys-con.com/story/?storyid=40248&DE=1
+  - http://groups.yahoo.com/group/soaplite/message/729

@@ -3,14 +3,9 @@ Commandline testing tools
 
 Environment
 ===========
- TSTSYSUSER  - user account for access to system (default USER)
- TSTSYSURL   - address of the SOAP server to use
- TSTSYSPREFS - default options to pass to testing system tools
-
-
-Files
-=====
- .ssh/ - ssh key used for obtaining permission to use the non-public tools.
+ STP_USER         - user account for access to system (default USER)
+ STP_SERVER_URL   - address of the SOAP server to use
+ STP_PREFS        - default options to pass to testing system tools
 
 
 Public Tools
@@ -24,7 +19,7 @@ require no login or authentication.
  lsimg     - lists the available (distro) images & info about them
  lssw      - lists the available software packages & info about them
  trqueue   - displays the current test request queue
- trfind    - searches test requests
+ trsearch  - searches test requests
  trget     - downloads the data & info for a given test
  patchfind - searches the patch repository
  patchget  - retrieves a given patch

@@ -1,8 +1,44 @@
 #!/usr/bin/perl -w
+use strict;
 
 use SOAP::Transport::HTTP;
-
 use WebService::TestSystem;
+use Getopt::Long;
+
+our $opt_user;
+
+# Handle commandline options
+Getopt::Long::Configure ('bundling', 'no_ignore_case');
+GetOptions(
+           'user|u'  => \$opt_user
+           );
+
+if ($opt_user) {
+    my ($login,$pass,$uid,$gid) = getpwnam('testsys');
+
+    $( = $gid;
+    $) = $gid;
+    $< = $uid;
+    $> = $uid;
+
+    ## Check that we managed to change Group/User IDs properly...
+    ## Change warn to die if it's important to you
+    if (  ((split(/ /,$)))[0] ne $gid) || ((split(/ /,$())[0] ne $gid)  ) {
+        warn "Couldn't Change Group ID!\n";
+    }
+
+    if (  ($> ne $uid) || ($< ne $uid)  ) {
+        warn "Couldn't Change User ID!\n";
+    }
+
+    undef($login);
+    undef($pass);
+    undef($uid);
+    undef($gid);
+
+    # Make program actually RUN as this user
+    fork and exit;
+}
 
 # don't want to die on 'Broken pipe' or Ctrl-C
 $SIG{PIPE} = $SIG{INT} = 'IGNORE';

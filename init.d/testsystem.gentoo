@@ -21,6 +21,7 @@ start() {
         ebegin "Starting testsystem"
         start-stop-daemon --start --background \
                           --make-pidfile \
+                          --chuid testsys \
                           --pidfile /var/run/testsystem.pid \
                           --startas /usr/bin/testsystem_d
         eend $?

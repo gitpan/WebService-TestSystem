@@ -9,7 +9,7 @@ use strict;
 
 my $soap = SOAP::Lite
     -> uri('http://www.osdl.org/WebService/TestSystem')
-    -> proxy('http://mercury:8081/~bryce/cgi-bin/testsystem.pl');
+    -> proxy('http://mercury:8081');
 # use SOAP::Lite +trace =>
 #   [qw(transport dispatch result parameters method trace)];
 
@@ -48,6 +48,11 @@ if ($result->fault) {
     $result->faultcode,
     $result->faultstring;
     exit -1;
+}
+
+if (! $result->result) {
+    warn "No results\n";
+    exit 0;
 }
 
 my @rows = @{$result->result};

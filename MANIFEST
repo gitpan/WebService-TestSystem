@@ -5,15 +5,22 @@ Makefile.PL
 README
 WebService-TestSystem.spec
 doc/PLAN
+doc/SCRIPTS_README
 doc/cmdline.txt
-doc/multi_node_testing.txt
 etc/testsystem.conf
 init.d/testsystem
 init.d/testsystem.gentoo
 lib/WebService/TestSystem.pm
+lib/WebService/TestSystem/Metrics.pm
 scripts/dev_client.pl
-scripts/trget
+scripts/stp-login
+scripts/stp-lshost
+scripts/stp-lsimage
+scripts/stp-lstest
+scripts/stp-metrics
+scripts/stp-trget
+scripts/stp-trsearch
 scripts/testsystem_d
 t/00_initialize.t
 t/zz_dump_config.t
-META.yml                                 Module meta-data (added by MakeMaker)
+META.yml
