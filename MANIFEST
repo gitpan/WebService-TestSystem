@@ -3,6 +3,7 @@ INSTALL
 MANIFEST
 Makefile.PL
 README
+WebService-TestSystem.spec
 doc/PLAN
 doc/cmdline.txt
 doc/multi_node_testing.txt

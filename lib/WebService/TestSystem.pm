@@ -37,7 +37,7 @@ my $stpdb_pass = '';
 my $STPDB_DBH;
 
 use vars qw($VERSION %FIELDS);
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 use fields qw(
               _stpdb_dbh

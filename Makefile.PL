@@ -24,6 +24,8 @@ while (my $arg = shift @ARGV) {
 }
 @ARGV = @pass_args;
 
+warn "Makefile.PL Args:  @ARGV\n";
+
 my %opts = (
             'NAME'	   => $args{'name'},
             'VERSION_FROM' => 'lib/WebService/TestSystem.pm',
@@ -104,6 +106,7 @@ sub MY::postamble {
 
     $text .= "install :: init.d/testsystem\n";
     my $initdir  = catdir( $destdir,  'etc', 'init.d' );
+    $text .= "\t\$(MKPATH) $initdir\n";
     my $initfiles;
     if (-f '/etc/gentoo-release') {
         # This is a gentoo system so use the gentoo init script instead

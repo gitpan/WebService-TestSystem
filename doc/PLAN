@@ -23,7 +23,18 @@ Phase 1 - Conceptual Questions
 * (DONE) Add POD for WebService::TestSystem
 * (DONE) Review existing reporting scripts & plan reporting this should do
 
-Phase 2 - Reporting Tools
+Phase 2 - Packaging
+-------
+* (DONE) Set up Makefile.PL / installation stuff
+* (DONE) Set up initscript for the daemon
+* (DONE) Test out init.d/testsystem
+* Get cpan2rpm to produce valid rpm
+  - Reports dependency error for WebService::TestSystem
+  - Doesn't reliably install /etc/init.d/testsystem
+  - Does not uninstall the WebService::TestSystem perl module
+  - Is installing into / instead of $distdir
+
+Phase 3 - Reporting Tools
 -------
 * Monthly Totals tool
 * Extract parts of linstab internals into testsystem
@@ -35,27 +46,24 @@ Phase 2 - Reporting Tools
 * Extract parts of stp_hourly.pl 
 * Routines to report detailed info about a given host
 
-Phase 3 - Authentication
+Phase 4 - Authentication
 -------
 * Learn about authentication & access control with SOAP
 * Implement authentication 
 * Implement access control
 
-Phase 4 - Packaging
+Phase 5 - More Packaging
 -------
-* (DONE) Set up Makefile.PL / installation stuff
 * Break out a config file
 * Do I need a website / web page for this?
 * Set up logging from server
-* Set up initscript for the daemon
 * Create separate package of client tools
-* Test out init.d/testsystem
 
-Phase 5 - Design
+Phase 6 - Design
 -------
 * Go through some existing scripts & decide what to include
 
-Phase 6 - API Stubbing
+Phase 7 - API Stubbing
 -------
 * Implement routines for all scripts identified as needed
    + add_test
@@ -69,12 +77,12 @@ Phase 6 - API Stubbing
    + Update software types
    + set available host types for a test
 
-Phase 7 - Client registration
+Phase 8 - Client registration
 -------
 * Add functionality for registering new client machines
 * Add way to direct clients to download & execute given tests
 
-Phase 8 - Test Client Machine Checkout
+Phase 9 - Test Client Machine Checkout
 -------
 * Invokes configuration of system as requested
 * SOAP call to check out stp machine for short period of time for login
