@@ -1,0 +1,99 @@
+
+Phase 0 - Initial usability for searching
+-------
+* (DONE) Consolodate the SOAP testcode into testsystem.pl
+* (DONE) Create basic WebService::TestSystem
+* (DONE) Sketch out a basic API
+* (DONE) Implement object model
+* (DONE) Add support in WebService::TestSystem to pull from mysql on cl004
+* (DONE) Implement some searching routines
+* (DONE) Set up tests, packaging, etc.
+* (DONE) How can client receive the error message?
+* (DONE) Create an initial cmdline tools for querying / searching test results
+  - trqueue & trget
+* (DONE) Add POD for trqueue and trget
+
+
+Phase 1 - Conceptual Questions
+-------
+* (DONE) What should this tool be called?  What's its scope?
+* (DONE) Review machine reservation system
+* (DONE) Where do soap daemons log their error output?
+* (DONE) Should I split up the different classes of functionality? - yes
+* (DONE) Add POD for WebService::TestSystem
+* (DONE) Review existing reporting scripts & plan reporting this should do
+
+Phase 2 - Reporting Tools
+-------
+* Monthly Totals tool
+* Extract parts of linstab internals into testsystem
+* Extract parts of stp_report.pl
+* Extract parts of plm_web_report.pl
+* Extract parts of analyze_queue.web.pl
+* Extract parts of stp_daily.pl
+* Extract parts of stp_hosts.pl
+* Extract parts of stp_hourly.pl 
+* Routines to report detailed info about a given host
+
+Phase 3 - Authentication
+-------
+* Learn about authentication & access control with SOAP
+* Implement authentication 
+* Implement access control
+
+Phase 4 - Packaging
+-------
+* (DONE) Set up Makefile.PL / installation stuff
+* Break out a config file
+* Do I need a website / web page for this?
+* Set up logging from server
+* Set up initscript for the daemon
+* Create separate package of client tools
+* Test out init.d/testsystem
+
+Phase 5 - Design
+-------
+* Go through some existing scripts & decide what to include
+
+Phase 6 - API Stubbing
+-------
+* Implement routines for all scripts identified as needed
+   + add_test
+   + add_host
+   + update_test
+   + update_host
+   + list_*
+   + putting machines into/out of maintenance mode
+   + retrieve logs from a given machine
+   + add new software types
+   + Update software types
+   + set available host types for a test
+
+Phase 7 - Client registration
+-------
+* Add functionality for registering new client machines
+* Add way to direct clients to download & execute given tests
+
+Phase 8 - Test Client Machine Checkout
+-------
+* Invokes configuration of system as requested
+* SOAP call to check out stp machine for short period of time for login
+   + check_out stp4-001 [--username=bob] [--period='5 hrs'] [--notify=me@domain.org]
+   + Allow wildcard specification (check out the first available 4-way)
+   + Waits until condition met, then invokes state change on machine
+   + Insert the expiration date into database, when it'll be
+     automatically returned to the pool
+   + Add a user's ssh key to the machine to allow root login
+   + Sends notice to email address if indicated
+* SOAP call to poll checkout status
+* SOAP call to extend the reservation by another [period]
+* SOAP call to check machine back in
+* Check out two machines at one time and allow them to connect
+   + Create a dummy wrap.sh for the master that checks out a client
+     machine, sleep/polls until it is available, then installs a
+     client-side script on it that communicates with the server.
+   + Once testing is complete, master dismisses client
+
+Future
+------
+* Query caching

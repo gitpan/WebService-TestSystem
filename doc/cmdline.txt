@@ -1,0 +1,78 @@
+Commandline testing tools
+-------------------------
+
+Environment
+===========
+ TSTSYSUSER  - user account for access to system (default USER)
+ TSTSYSURL   - address of the SOAP server to use
+ TSTSYSPREFS - default options to pass to testing system tools
+
+
+Files
+=====
+ .ssh/ - ssh key used for obtaining permission to use the non-public tools.
+
+
+Public Tools
+============
+These tools are available for anyone and everyone to use.  They do not cause
+changes to the state of the testing system nor incur significant loads.  They
+require no login or authentication.
+
+ lstest    - lists the available tests & info about them
+ lshost    - lists the available host machines & info about them
+ lsimg     - lists the available (distro) images & info about them
+ lssw      - lists the available software packages & info about them
+ trqueue   - displays the current test request queue
+ trfind    - searches test requests
+ trget     - downloads the data & info for a given test
+ patchfind - searches the patch repository
+ patchget  - retrieves a given patch
+
+
+User Tools
+==========
+These tools require a login but are available to anyone.  They may cause
+changes to the testing system's state.
+
+ tradd     - adds one or more new test requests to the queue
+ trrm      - cancels a test request in the queue
+ tredit    - edits a pending test request
+ trtag     - tags/annotates a given test request
+ patchadd  - adds a patch to the testing system
+ patchedit - edits the info about a given patch
+
+
+Advanced Tools
+==============
+These tools provide powerful access to the system.  Special permission and
+arrangements are generally required in order to access these tools.
+
+ hostadd   - adds/registers a new host machine to the system
+ hostedit  - edits info about a host machine
+ hostrm    - removes a host machine from the testing system
+ hostreq   - requests/schedules login access to a host machine
+	     + checkout
+	     + release
+	     + schedule
+ testadd   - adds a new test to the system
+ testedit  - changes properties of a test in the testing system
+ testrm    - removes a test from the testing system
+ imgmanip  - allows alteration of the distro images in the system
+ swadd     - adds new software to the test system
+ swget     - allows sw owner to retrieve the src/bin sw package
+
+
+Administrative Tools
+====================
+These tools are only available to administrators and are used for managing the
+system.  
+
+ power     - power cycles a host machine
+ hostset   - directly set parameters about the host machine (availability,
+             status, notes, etc.)
+ testset   - set status (availability, etc.) and other parameters for tests 
+ swset     - sets status and other parameters for software
+
+
+
